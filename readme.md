@@ -1,10 +1,13 @@
-# Project Name
-
 This repo contains the smart contracts and the test/deploy scripts for an Oracle-based spot DEX. Users can use this DEX to swap two supported tokens based on the prices from Oracles in two steps. First, they need to submit an order on-chain and then settle the submitted order after two minutes (but within 5 minutes after that order's submission).
 
 The settlement price will use the latest prices from the oracles, so it might differ from when that order was submitted. The rationale behind this design is that users can't frontrun an Oracle price update.
 
 You can use this repo to create a simulation trading competition where you have different news that impacts the market.
+
+# Technology Stack & Tools
+
+- Solidity (Smart Contracts)
+- Foundry (Development Toolkit)
 
 # Installation
 
