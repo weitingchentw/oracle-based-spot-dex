@@ -1,0 +1,44 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ExchangeV1
+    network: base-sepolia
+    source:
+      address: "0x4BD498bFE6531cDf4238e375d8d3bc87e8Fcf7b7"
+      abi: ExchangeV1
+      startBlock: 16042525
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Initialized
+        - OrderPlaced
+        - OrderSettled
+        - OwnershipTransferred
+        - Upgraded
+        - feeSet
+        - oracleSet
+      abis:
+        - name: ExchangeV1
+          file: ./abis/ExchangeV1.json
+      eventHandlers:
+        - event: Initialized(uint64)
+          handler: handleInitialized
+        - event: OrderPlaced(address,address,address,uint256,int256,int256)
+          handler: handleOrderPlaced
+        - event: OrderSettled(address,address,address,uint256,uint256,int256,int256,uint256)
+          handler: handleOrderSettled
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+        - event: feeSet(address,address,uint8)
+          handler: handlefeeSet
+        - event: oracleSet(address,address)
+          handler: handleoracleSet
+      file: ./src/exchange-v-1.ts

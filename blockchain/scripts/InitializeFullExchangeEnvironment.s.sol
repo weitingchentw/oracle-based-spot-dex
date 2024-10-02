@@ -33,6 +33,7 @@ contract InitializeFullExchangeEnvironment is Script {
 
         // Setup exchange as the proxied ExchangeV1
         ExchangeV1 exchange = ExchangeV1(payable(address(exchangeProxy)));
+        console.log("Exchange deployed at:", address(exchange));
 
         // ================================
         // Deploy Five Tokens
@@ -123,8 +124,8 @@ contract InitializeFullExchangeEnvironment is Script {
         exchange.setSwapFee(address(weth), address(dai), 10);
 
         // Set Starting Time
-        exchange.setStartingTime(block.timestamp + 1 weeks);
-        exchange.setClosingTime(block.timestamp + 2 weeks);
+        exchange.setStartingTime(uint32(block.timestamp + 1 weeks));
+        exchange.setClosingTime(uint32(block.timestamp + 2 weeks));
 
         // Set IsPaused to false
         exchange.setIsPaused(false);

@@ -145,3 +145,6 @@ dist
 *cache
 *broadcast
 *artifacts
+
+# Subgraph
+./subgraph/*

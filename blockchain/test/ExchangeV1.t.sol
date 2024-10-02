@@ -101,8 +101,8 @@ contract ExchangeV1Test is Test {
         exchange.setOracle(testTokenAddr, address(testOracle));
         exchange.setOracle(testToken2Addr, address(testOracle2));
         exchange.setSwapFee(testTokenAddr, testToken2Addr, 10); // 0.1%
-        exchange.setStartingTime(block.timestamp - 1);
-        exchange.setClosingTime(block.timestamp + 1 weeks);
+        exchange.setStartingTime(uint32(block.timestamp - 1));
+        exchange.setClosingTime(uint32(block.timestamp + 1 weeks));
         exchange.setIsPaused(false);
         vm.stopPrank();
     }
@@ -180,7 +180,7 @@ contract ExchangeV1Test is Test {
     function testPlaceOrderAfterClosingTime() public {
         // Change the closing time
         vm.startPrank(owner);
-        exchange.setClosingTime(block.timestamp);
+        exchange.setClosingTime(uint32(block.timestamp));
         vm.stopPrank();
 
         vm.warp(block.timestamp + 1);

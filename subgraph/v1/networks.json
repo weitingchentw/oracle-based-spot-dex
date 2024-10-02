@@ -1,0 +1,8 @@
+{
+  "base-sepolia": {
+    "ExchangeV1": {
+      "address": "0x4BD498bFE6531cDf4238e375d8d3bc87e8Fcf7b7",
+      "startBlock": 16042525
+    }
+  }
+}

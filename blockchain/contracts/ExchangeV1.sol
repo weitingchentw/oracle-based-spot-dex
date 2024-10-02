@@ -219,7 +219,7 @@ contract ExchangeV1 is ReentrancyGuard, Initializable, UUPSUpgradeable, OwnableU
         );
     }
 
-    function withraw(address _token) external onlyOwner {
+    function withdraw(address _token) external onlyOwner {
         IERC20(_token).safeTransfer(owner(), IERC20(_token).balanceOf(address(this)));
     }
 
