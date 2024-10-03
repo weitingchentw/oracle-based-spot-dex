@@ -145,7 +145,7 @@ dist
 *cache
 *broadcast
 *artifacts
-.DS_Store
+**/.DS_Store
 
 # Subgraph's subfolders and the files in them
 /subgraph/*
