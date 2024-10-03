@@ -70,7 +70,7 @@ chmod +x test_and_deploy.sh
 
 At this point you should have the address for your DEX. You can now proceed to deploy a subgraph that you can use as the API for your UI.
 
-There are lots of subgraph providers on the market. I will use [Alchemy](https://www.alchemy.com) in this section. Don't worry it's free for test purposes!
+There are lots of subgraph providers on the market. We will use [Alchemy](https://www.alchemy.com) in this section. Don't worry it's free for test purposes!
 
 ### 1. Install Graph CLI globally:
 
@@ -80,7 +80,7 @@ npm i -g @graphprotocol/graph-cli@0.73.0
 
 ### 2. Initialize the subgraph: \
 
-Next, create a `subgraph` folder in the root directory, move to that folder and run `graph init oracle-based-spot-dex --allow-simple-name` to initialize the package's CLI wizard and select the following options:
+Next, create a `subgraph` folder in the root directory, move to that folder in the terminal and run `graph init oracle-based-spot-dex --allow-simple-name` to initialize the package's CLI wizard and select the following options:
 
 1.  Protocol: ethereum
 2.  Product for which to initialize: hosted-service
@@ -129,7 +129,7 @@ Besides the `.env` file, you also need to work on the `tokens.json` by putting t
 
 ### 4. Start the Website
 
-Now, you're all set. Run `npm run dev` to run the website and request the test tokens by clicking the water droplet image on the UI (and sending an on-chain transaction).
+Now, you're all set. Run `npm run dev` to run the website and request test tokens by clicking the water droplet image on the UI (and sending an on-chain transaction).
 
 # What's Next
 
