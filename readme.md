@@ -80,7 +80,7 @@ npm i -g @graphprotocol/graph-cli@0.73.0
 
 ### 2. Initialize the subgraph: \
 
-Next, change the directory to `subgraph` in your terminal and run `graph init oracle-based-spot-dex --allow-simple-name` to initialize the package's CLI wizard and select the following options:
+Next, create a `subgraph` folder in the root directory, move to that folder and run `graph init oracle-based-spot-dex --allow-simple-name` to initialize the package's CLI wizard and select the following options:
 
 1.  Protocol: ethereum
 2.  Product for which to initialize: hosted-service
