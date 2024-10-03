@@ -10,7 +10,6 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import MainLayout from "../layout/mainLayout";
 

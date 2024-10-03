@@ -8,9 +8,9 @@ dataSources:
     name: ExchangeV1
     network: base-sepolia
     source:
-      address: "0x4BD498bFE6531cDf4238e375d8d3bc87e8Fcf7b7"
+      address: "0xdE7484f468976314C952aFD98aaB58b12A8e2a2d"
       abi: ExchangeV1
-      startBlock: 16042525
+      startBlock: 16101678
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

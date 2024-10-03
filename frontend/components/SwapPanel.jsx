@@ -47,9 +47,7 @@ export default function SwapPanel() {
   const [feeRateInPercent, setFeeRateInPercent] = useState(0.0)
   const [exchangeRate, setExchangeRate] = useState(0.0)
 
-  const EXCHANGE_CONTRACT_ADDRESS = '0xf974B631f3016CAD54A65E7676bbeb85015484ef';
-  // const EXCHANGE_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT_ADDRESS;
-  // TODO: change to use the env variable
+  const EXCHANGE_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT_ADDRESS;
 
   const [fromTokenDict, setFromTokenDict] = useState({
     balance: 0.0,
@@ -256,11 +254,7 @@ export default function SwapPanel() {
   });
 
   const isApprovalNeeded = async (traderAddress) => {
-    // const tokenContract = new Contract(tokensDict[fromTokenDict['name']].address, erc20ABI, provider);
-
     try {
-      // const allowance = await tokenContract.allowance(traderAddress, EXCHANGE_CONTRACT_ADDRESS);
-
       const allowance = await readContract({
         address: tokensDict[fromTokenDict['name']].address,
         abi: erc20ABI,

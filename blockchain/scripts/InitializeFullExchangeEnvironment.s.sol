@@ -41,9 +41,9 @@ contract InitializeFullExchangeEnvironment is Script {
 
         // Deploy five tokens
         TestToken wbtc = new TestToken("Wrapped Bitcoin", "WBTC", 0x0000000000000000000000000000000000000000);
-        TestToken usdc = new TestToken("Circle's USD", "USDC", 0x0000000000000000000000000000000000000000);
+        TestToken usdc = new TestToken("Circle USD", "USDC", 0x0000000000000000000000000000000000000000);
         TestToken usdt = new TestToken("Tether", "USDT", 0x0000000000000000000000000000000000000000);
-        TestToken dai = new TestToken("Maker's DAI", "DAI", 0x0000000000000000000000000000000000000000);
+        TestToken dai = new TestToken("DAI", "DAI", 0x0000000000000000000000000000000000000000);
         TestToken weth = new TestToken("Wrapped ETH", "WETH", 0x0000000000000000000000000000000000000000);
         console.log("WBTC deployed at:", address(wbtc));
         console.log("USDC deployed at:", address(usdc));
@@ -59,7 +59,7 @@ contract InitializeFullExchangeEnvironment is Script {
         TestFaucet testFaucet = new TestFaucet(
             [address(wbtc), address(usdc), address(usdt), address(dai), address(weth)], address(exchangeProxy)
         );
-        console.log("TestFaucet deployed at:", address(testFaucet));
+        console.log("Faucet deployed at:", address(testFaucet));
 
         // Set testFaucet's address to five tokens
         wbtc.setFaucetAddress(address(testFaucet));
@@ -77,11 +77,60 @@ contract InitializeFullExchangeEnvironment is Script {
         TestOracle daiOracle = new TestOracle();
         TestOracle wethOracle = new TestOracle();
 
-        console.log("WBTC's Oracle deployed at:", address(wbtc));
-        console.log("USDC's Oracle deployed at:", address(usdc));
-        console.log("USDT's Oracle deployed at:", address(usdt));
-        console.log("DAI's Oracle deployed at:", address(dai));
-        console.log("WETH's Oracle deployed at:", address(weth));
+        console.log("WBTC's Oracle deployed at:", address(wbtcOracle));
+        console.log("USDC's Oracle deployed at:", address(usdcOracle));
+        console.log("USDT's Oracle deployed at:", address(usdtOracle));
+        console.log("DAI's Oracle deployed at:", address(daiOracle));
+        console.log("WETH's Oracle deployed at:", address(wethOracle));
+
+        // Add a mock price to each oracle if it's for testing purpose
+        if (vm.envBool("IS_TESTING")) {
+            wbtcOracle.updateRoundData(
+                TestOracle.RoundData({
+                    roundId: 0,
+                    answer: 6900000000000, // $69,000.00000000 (8 decimal places)
+                    startedAt: block.timestamp,
+                    updatedAt: block.timestamp,
+                    answeredInRound: 0
+                })
+            );
+            usdcOracle.updateRoundData(
+                TestOracle.RoundData({
+                    roundId: 0,
+                    answer: 100000000, // $1.00000000 (8 decimal places)
+                    startedAt: block.timestamp,
+                    updatedAt: block.timestamp,
+                    answeredInRound: 0
+                })
+            );
+            usdtOracle.updateRoundData(
+                TestOracle.RoundData({
+                    roundId: 0,
+                    answer: 100010000, // $1.00010000 (8 decimal places)
+                    startedAt: block.timestamp,
+                    updatedAt: block.timestamp,
+                    answeredInRound: 0
+                })
+            );
+            daiOracle.updateRoundData(
+                TestOracle.RoundData({
+                    roundId: 0,
+                    answer: 100100000, // $1.00100000 (8 decimal places)
+                    startedAt: block.timestamp,
+                    updatedAt: block.timestamp,
+                    answeredInRound: 0
+                })
+            );
+            wethOracle.updateRoundData(
+                TestOracle.RoundData({
+                    roundId: 0,
+                    answer: 420000000000, // $4,200.00000000 (8 decimal places)
+                    startedAt: block.timestamp,
+                    updatedAt: block.timestamp,
+                    answeredInRound: 0
+                })
+            );
+        }
 
         // ================================
         // Set up States on ExchangeImpl
@@ -123,12 +172,17 @@ contract InitializeFullExchangeEnvironment is Script {
         exchange.setSwapFee(address(weth), address(usdt), 10);
         exchange.setSwapFee(address(weth), address(dai), 10);
 
-        // Set Starting Time
-        exchange.setStartingTime(uint32(block.timestamp + 1 weeks));
-        exchange.setClosingTime(uint32(block.timestamp + 2 weeks));
+        if (vm.envBool("IS_TESTING")) {
+            exchange.setStartingTime(uint32(block.timestamp));
+            exchange.setClosingTime(uint32(block.timestamp + 2 weeks));
 
-        // Set IsPaused to false
-        exchange.setIsPaused(false);
+            exchange.setIsPaused(false);
+        } else {
+            exchange.setStartingTime(uint32(block.timestamp + 1 weeks));
+            exchange.setClosingTime(uint32(block.timestamp + 2 weeks));
+
+            exchange.setIsPaused(true);
+        }
 
         vm.stopBroadcast();
 

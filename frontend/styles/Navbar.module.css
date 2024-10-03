@@ -1,17 +1,19 @@
-
-
 .navbar {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	padding: 2rem 4rem 0.8rem 4rem;
-	gap: 2rem;
-	margin-bottom: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 4rem 0.8rem 4rem;
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
 
+.logo {
+  width: 6rem;
+  cursor: pointer;
+}
 
-.alchemy_logo{
-	width: 6rem;
-	cursor: pointer;
+.faucet_icon {
+  height: 2.5rem; /* Adjust this value to match the height of other elements */
+  width: auto; /* Maintain aspect ratio */
 }

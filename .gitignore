@@ -146,5 +146,5 @@ dist
 *broadcast
 *artifacts
 
-# Subgraph
-./subgraph/*
+# Subgraph's subfolders and the files in them
+/subgraph/*
